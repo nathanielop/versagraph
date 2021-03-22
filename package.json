@@ -1,0 +1,13 @@
+{
+  "name": "versagraph",
+  "description": "A versatile graphing component for React",
+  "author": "Nathaniel Pendy",
+  "license": "MIT",
+  "version": "0.1.0",
+  "devDependencies": {},
+  "repository": { "url": ""},
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
