@@ -1,6 +1,6 @@
 # Versagraph
 
-A versatile yet compact library for creating graphs. No associated dependencies. Just a plain and simple graphing function for use with any DOM element.
+A versatile yet compact library for creating graphs in React
 
 # Props
 
