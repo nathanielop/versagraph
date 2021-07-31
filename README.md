@@ -2,7 +2,11 @@
 
 A versatile yet compact library for creating graphs in React
 
-# Props
+## Overview
+
+A graph is composed of a series of layers, as defined in the data property passed to the graph component. Each layer can either be a flat array, in which case properties will be defaulted, or they can be an object providing a coordinates array and a props array, made up of the available properties below.
+
+## Layer Props
 
 ### General
 

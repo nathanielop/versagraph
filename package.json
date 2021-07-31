@@ -3,8 +3,14 @@
   "description": "A versatile graphing component for React",
   "author": "Nathaniel Pendy",
   "license": "MIT",
-  "version": "0.1.0",
-  "devDependencies": {},
+  "version": "1.0.0",
+  "dependencies": {
+    "tailwindcss": "2",
+    "react": "17"
+  },
+  "devDependencies": {
+    "kiss-test": "0.2"
+  },
   "repository": { "url": "https://www.github.com/nathanielop/versagraph" },
   "main": "src/index.js"
 }

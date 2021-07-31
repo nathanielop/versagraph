@@ -1,5 +1,3 @@
-import constructGraph from './functions/construct-graph.js';
+import Graph from './components/graph.js';
 
-export default {
-    constructGraph
-}
+export default Graph;
