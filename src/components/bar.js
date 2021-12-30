@@ -1,4 +1,10 @@
-export default ({ getX, getY, coordinate: [x, y], height, props }) => {
+export default ({
+  getX,
+  getY,
+  coordinate: [x, y],
+  height,
+  props: { barWidth }
+}) => {
   const startingX = getX(x) - barWidth / 2;
   return (
     <rect

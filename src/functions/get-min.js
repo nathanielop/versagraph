@@ -1,1 +1,1 @@
-export default arr => Math.min(...arr.filter(val => val).map(o => o.y));
+export default arr => Math.min(...arr.flatMap(o => (o ? [o.y] : [])));

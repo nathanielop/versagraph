@@ -2,22 +2,21 @@ export default {
   allowNegative: false,
   lineColor: 'rgb(0,0,0)',
   pointProps: {
-    className: 'text-black',
     onClick: () => {},
     onMouseOver: () => {},
-    r: '0.5px'
+    r: '0.5px',
+    style: { color: 'black' }
   },
   lineProps: {
-    className: 'text-black',
     onClick: () => {},
     onMouseOver: () => {},
-    style: { strokeWidth: '0.25px', stroke: 'black' }
+    style: { color: 'black', strokeWidth: '0.25px', stroke: 'black' }
   },
   barProps: {
-    className: 'text-black',
     onClick: () => {},
     onMouseOver: () => {},
     style: {
+      color: 'black',
       fill: 'rgb(0,0,0)',
       strokeWidth: '0px'
     }

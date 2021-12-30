@@ -1,6 +1,6 @@
-import { Fragment, useCallback, useRef } from 'react';
+import { Fragment } from 'react';
 
-import calculateGraphProperties from '../functions/calculate-graph-properties.js';
+import getGlobals from '../functions/get-globals.js';
 import getMax from '../functions/get-max.js';
 import getMin from '../functions/get-min.js';
 import getStrLength from '../functions/get-str-length.js';
@@ -18,8 +18,6 @@ import Line from './line.js';
 import Point from './point.js';
 
 export default ({ data: initial, ...props }) => {
-  const elRef = useRef();
-
   const data = initial.map(layer => sanitizeValues(layer));
 
   const {
@@ -39,10 +37,10 @@ export default ({ data: initial, ...props }) => {
     labelX
   } = getUsableProperties(props);
 
-  const { max, min, width, height } = calculateGraphProperties(data);
+  const { max, min, width, height, getY, getX } = getGlobals(data);
 
   return (
-    <Container elRef={elRef} props={containerProps} data={data}>
+    <Container props={containerProps} data={data}>
       {props.title && (
         <text style={{ fill: titleColor, fontSize: '24px' }}>
           <textPath startOffset='50%' textAnchor='middle'>
@@ -55,7 +53,11 @@ export default ({ data: initial, ...props }) => {
           width='100%'
           x={100 - graphWidth}
           y='7'
-          className='fill-current text-gray-100 overflow-visible rounded-full'
+          style={{
+            fill: 'rgb(235,235,235)',
+            overflow: 'visible',
+            borderRadius: '9999px'
+          }}
         >
           <rect
             x={`${
@@ -100,7 +102,7 @@ export default ({ data: initial, ...props }) => {
         </svg>
       )}
       {labelY && (
-        <svg y={yOffset} height={graphHeight} className='overflow-visible'>
+        <svg y={yOffset} height={graphHeight} style={{ overflow: 'visible' }}>
           {props.yAxisLabel && (
             <text
               y={'56%'}
@@ -174,8 +176,8 @@ export default ({ data: initial, ...props }) => {
               key={`grid_y_line_${i}`}
               x1={'0%'}
               x2={'100%'}
-              y1={`${getY(graphMax - i * yInterval)}%`}
-              y2={`${getY(graphMax - i * yInterval)}%`}
+              y1={`${getY(max - i * yInterval)}%`}
+              y2={`${getY(max - i * yInterval)}%`}
               style={{ strokeWidth: '0.15px', stroke: 'black' }}
             />
           ))}
@@ -254,12 +256,12 @@ export default ({ data: initial, ...props }) => {
         )}
       </svg>
       <rect
-        className='flex'
         width={graphWidth}
         height={graphHeight}
         y={yOffset}
         x={100 - graphWidth}
         style={{
+          display: 'flex',
           fill: 'none',
           stroke: 'black',
           strokeWidth: '0.25px'
@@ -270,7 +272,10 @@ export default ({ data: initial, ...props }) => {
           width={graphWidth}
           x={100 - graphWidth}
           y={graphHeight + yOffset}
-          className='fill-current text-white overflow-visible'
+          style={{
+            fill: 'white',
+            overflow: 'visible'
+          }}
         >
           {!showError &&
             times(nodesLength, i => (
