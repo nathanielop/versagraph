@@ -7,6 +7,7 @@ export default {
     r: '0.5px',
     style: { color: 'black' }
   },
+  fallback: 'No Data',
   lineProps: {
     onClick: () => {},
     onMouseOver: () => {},
@@ -21,13 +22,10 @@ export default {
       strokeWidth: '0px'
     }
   },
-  type: 'bar',
   lineWidth: '1px',
   gridWidth: '1px',
   borderWidth: '1px',
-  grid: true,
+  grid: { y: true, x: false },
   border: true,
-  labelY: true,
-  labelX: true,
   textColor: 'rgb(0,0,0)'
 };
