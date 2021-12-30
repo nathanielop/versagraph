@@ -1,1 +1,2 @@
-export default (iterations, iterate) => new Array(iterations).fill().map((val,i) => iterate(i));
+export default (iterations, iterate) =>
+  new Array(iterations).fill().map((_, i) => iterate(i));

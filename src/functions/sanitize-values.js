@@ -3,8 +3,8 @@ import formatLayer from './format-layer.js';
 
 export default values => {
   const layer = formatLayer(values);
-  return { 
-    coordinates: layer.coordinates.map(formatCoordinate), 
-    ...layer 
+  return {
+    coordinates: layer.coordinates.map(formatCoordinate),
+    ...layer
   };
-}
+};

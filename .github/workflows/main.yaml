@@ -10,5 +10,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install
       run: npm install
+    - name: Lint
+      run: bin/lint
     - name: Test
       run: bin/test

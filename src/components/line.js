@@ -1,4 +1,4 @@
-export default ({ coords: [[x1,y1], [x2,y2]], props }) => (
+export default ({ getX, getY, coords: [[x1, y1], [x2, y2]], props }) => (
   <line
     x1={`${getX(x1)}%`}
     x2={`${getX(x2)}%`}

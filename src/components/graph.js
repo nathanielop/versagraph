@@ -1,37 +1,28 @@
 import { Fragment, useCallback, useRef } from 'react';
 
-import useElWatcher from '../hooks/use-el-watcher.js';
-import getMin from '../functions/get-min.js';
-import getMax from '../functions/get-max.js';
-import round from '../functions/round.js';
-import pairCoordinates from '../functions/pair-coodinates.js';
-import getStrLength from '../functions/get-str-length.js';
-import times from '../functions/times.js';
-import getUsableProperties from '../functions/get-usable-properties.js';
 import calculateGraphProperties from '../functions/calculate-graph-properties.js';
+import getMax from '../functions/get-max.js';
+import getMin from '../functions/get-min.js';
+import getStrLength from '../functions/get-str-length.js';
+import getUsableProperties from '../functions/get-usable-properties.js';
+import pairCoordinates from '../functions/pair-coodinates.js';
+import round from '../functions/round.js';
 import sanitizeValues from '../functions/sanitize-values.js';
+import times from '../functions/times.js';
+import useElWatcher from '../hooks/use-el-watcher.js';
 
+import Bar from './bar.js';
+import Container from './container.js';
 import Legend from './legend.js';
 import Line from './line.js';
 import Point from './point.js';
-import Container from './container.js';
-import Bar from './bar.js';
 
 export default ({ data: initial, ...props }) => {
   const elRef = useRef();
 
-  const offsetWidth = useElWatcher({
-    elRef,
-    getState: useCallback(() => elRef.current?.offsetWidth, [])
-  });
-  const offsetHeight = useElWatcher({
-    elRef,
-    getState: useCallback(() => elRef.current?.offsetHeight, [])
-  });
-
   const data = initial.map(layer => sanitizeValues(layer));
 
-  const { 
+  const {
     allowNegative,
     barProps,
     lineProps,
@@ -45,22 +36,23 @@ export default ({ data: initial, ...props }) => {
     grid,
     border,
     labelY,
-    labelX,
+    labelX
   } = getUsableProperties(props);
 
-  const data = calculateGraphProperties(data);
-  const { max, min, width, height } = data;
+  const { max, min, width, height } = calculateGraphProperties(data);
 
   return (
     <Container elRef={elRef} props={containerProps} data={data}>
       {props.title && (
         <text style={{ fill: titleColor, fontSize: '24px' }}>
-          <textPath startOffset="50%" text-anchor="middle">{props.title}</textPath>
+          <textPath startOffset='50%' textAnchor='middle'>
+            {props.title}
+          </textPath>
         </text>
       )}
       {props.legend && (
         <svg
-          width={graphWidth}
+          width='100%'
           x={100 - graphWidth}
           y='7'
           className='fill-current text-gray-100 overflow-visible rounded-full'
@@ -107,7 +99,7 @@ export default ({ data: initial, ...props }) => {
           ))}
         </svg>
       )}
-      {(!props.yLabels || props.yLabels !== false) && (
+      {labelY && (
         <svg y={yOffset} height={graphHeight} className='overflow-visible'>
           {props.yAxisLabel && (
             <text
@@ -118,43 +110,38 @@ export default ({ data: initial, ...props }) => {
             </text>
           )}
           {!showError &&
-            times(
-              (props.yInterval ?? 5) + (props.allowNegative ? 3 : 2),
-              i => (
-                <text
-                  key={`y_label_${i}`}
-                  x={
-                    labelWidth -
-                    ((i ===
-                      (props.yInterval ?? 5) +
-                        (props.allowNegative ? 3 : 2) -
-                        1 && !props.allowNegative
-                      ? 0
-                      : graphMax - i * yInterval
-                    )
-                      .toFixed(2)
-                      .toString().length +
-                      1) +
-                    (props.yAxisLabel ? 100 - graphWidth - 10 : 0)
-                  }
-                  y={`${getY(graphMax - i * (yInterval * 1)) + 1.25}%`}
-                  style={{
-                    fill: props.yLabelColor ?? 'black',
-                    fontWeight: 'lighter',
-                    fontSize: '2.5px'
-                  }}
-                >
-                  {`${props.yAxisLabelPrefix ?? ''}
+            times((props.yInterval ?? 5) + (allowNegative ? 3 : 2), i => (
+              <text
+                key={`y_label_${i}`}
+                x={
+                  labelWidth -
+                  ((i ===
+                    (props.yInterval ?? 5) + (allowNegative ? 3 : 2) - 1 &&
+                  !allowNegative
+                    ? 0
+                    : graphMax - i * yInterval
+                  )
+                    .toFixed(2)
+                    .toString().length +
+                    1) +
+                  (props.yAxisLabel ? 100 - graphWidth - 10 : 0)
+                }
+                y={`${getY(graphMax - i * (yInterval * 1)) + 1.25}%`}
+                style={{
+                  fill: props.yLabelColor ?? 'black',
+                  fontWeight: 'lighter',
+                  fontSize: '2.5px'
+                }}
+              >
+                {`${props.yAxisLabelPrefix ?? ''}
                    ${(i ===
-                     (props.yInterval ?? 5) +
-                       (props.allowNegative ? 3 : 2) -
-                       1 && !props.allowNegative
+                     (props.yInterval ?? 5) + (allowNegative ? 3 : 2) - 1 &&
+                   !allowNegative
                      ? 0
                      : graphMax - i * yInterval
                    ).toFixed(2)}`}
-                </text>
-              )
-            )}
+              </text>
+            ))}
         </svg>
       )}
       <svg
@@ -163,20 +150,23 @@ export default ({ data: initial, ...props }) => {
         y={yOffset}
         x={100 - graphWidth}
       >
-        {showError && (!props.noData ? (
-          <text
-            x='42%'
-            y='50%'
-            style={{
-              fill: 'rgb(125,125,125)',
-              fontSize: '4px',
-              fontWeight: 'bold',
-              stroke: 'none'
-            }}
-          >
-            No Data
-          </text>
-        ) : props.noData)}
+        {showError &&
+          (!props.noData ? (
+            <text
+              x='42%'
+              y='50%'
+              style={{
+                fill: 'rgb(125,125,125)',
+                fontSize: '4px',
+                fontWeight: 'bold',
+                stroke: 'none'
+              }}
+            >
+              No Data
+            </text>
+          ) : (
+            props.noData
+          ))}
         {!showError &&
           (!props.yGrid || props.yGrid !== false) &&
           times((props.yInterval ?? 5) + 2, i => (
@@ -291,7 +281,8 @@ export default ({ data: initial, ...props }) => {
                   !isNaN((100 / (nodesLength - 1)) * i - 1)
                     ? (100 / (nodesLength - 1)) * i -
                       1 -
-                      0.5 * getStrLength(props.xLabels[nodesLength - 1 - i] ?? i)
+                      0.5 *
+                        getStrLength(props.xLabels[nodesLength - 1 - i] ?? i)
                     : 0
                 }%`}
                 style={{

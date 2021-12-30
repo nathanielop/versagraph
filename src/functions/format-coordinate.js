@@ -1,6 +1,9 @@
 export default (coordinate, index) => {
   if (coordinate instanceof Array) {
-    if (coordinate.length === 2 && coordinate.filter(val => val).length === coordinate) {
+    if (
+      coordinate.length === 2 &&
+      coordinate.filter(val => val).length === coordinate
+    ) {
       return coordinate;
     }
   } else if (coordinate instanceof Object) {
@@ -11,4 +14,4 @@ export default (coordinate, index) => {
     return [index, coordinate];
   }
   throw new Error(`Invalid coordinate ${JSON.stringify(coordinate)} provided`);
-}
+};

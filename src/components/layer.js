@@ -1,3 +1,1 @@
-export default ({ coordinates, ...props }) => {
-    return (<div></div>);
-}
+export default ({ coordinates, ...props }) => <div></div>;

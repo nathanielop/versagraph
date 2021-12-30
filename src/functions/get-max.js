@@ -1,4 +1,1 @@
-export default arr => Math.max.apply(
-  Math,
-  arr.filter(val => val).map(o => o.y)
-);
+export default arr => Math.max(...arr.filter(val => val).map(o => o.y));

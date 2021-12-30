@@ -9,8 +9,13 @@
     "react": "17"
   },
   "devDependencies": {
+    "eslint-config-coderiety": "2",
     "kiss-test": "0.2"
   },
   "repository": { "url": "https://www.github.com/nathanielop/versagraph" },
-  "main": "src/index.js"
+  "main": "src/index.js",
+  "eslintConfig": {
+    "root": true,
+    "extends": "coderiety"
+  }
 }

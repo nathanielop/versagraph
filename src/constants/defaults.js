@@ -19,7 +19,7 @@ export default {
     onMouseOver: () => {},
     style: {
       fill: 'rgb(0,0,0)',
-      strokeWidth: '0px',
+      strokeWidth: '0px'
     }
   },
   type: 'bar',
