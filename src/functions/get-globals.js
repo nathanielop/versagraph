@@ -1,9 +1,20 @@
-import getMax from './get-max.js';
-import getMin from './get-min.js';
+export default ({ layers }) => {
+  let minY, maxY, minX, maxX;
+  for (const layer of layers) {
+    const { coordinates } = layer;
+    for (const [x, y] of coordinates) {
+      if (!minX || x < minX) minX = x;
+      if (!maxX || x > maxX) maxX = x;
+      if (!maxY || y > maxY) maxY = y;
+      if (!minY || y < minY) minY = y;
+    }
+  }
 
-export default data => {
-  const max = getMax(data);
-  const min = getMin(data);
-  // TODO: return getX, getY globals fns from here
-  return { max, min };
+  return {
+    width: 100,
+    height: 100,
+    getX: x => (x / maxX) * 100,
+    getY: y => (y / maxY) * 100,
+    bounds: { minX, maxX, minY, maxY }
+  };
 };

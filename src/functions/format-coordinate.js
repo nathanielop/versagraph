@@ -10,7 +10,7 @@ export default (coordinate, index) => {
     if (coordinate.x && coordinate.y) {
       return [coordinate.x, coordinate.y];
     }
-  } else if (coordinate instanceof String || coordinate instanceof Number) {
+  } else if (['string', 'number'].includes(typeof coordinate)) {
     return [index, coordinate];
   }
   throw new Error(`Invalid coordinate ${JSON.stringify(coordinate)} provided`);

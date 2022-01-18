@@ -1,30 +1,27 @@
 export default {
   allowNegative: false,
   lineColor: 'rgb(0,0,0)',
-  pointProps: {
-    onClick: () => {},
-    onMouseOver: () => {},
-    r: '0.5px',
-    style: { color: 'black' }
+  layerProps: {
+    pointProps: { r: '1px', style: { color: 'black' } },
+    lineProps: {
+      style: { color: 'black', strokeWidth: '0.25px', stroke: 'black' }
+    },
+    barProps: {
+      barWidth: 20,
+      style: { color: 'black', fill: 'rgb(0,0,0)', strokeWidth: '0px' }
+    }
   },
   fallback: 'No Data',
-  lineProps: {
-    onClick: () => {},
-    onMouseOver: () => {},
-    style: { color: 'black', strokeWidth: '0.25px', stroke: 'black' }
-  },
-  barProps: {
-    onClick: () => {},
-    onMouseOver: () => {},
+  borderProps: {
     style: {
-      color: 'black',
-      fill: 'rgb(0,0,0)',
-      strokeWidth: '0px'
+      display: 'flex',
+      fill: 'none',
+      stroke: 'black',
+      strokeWidth: '0.25px'
     }
   },
   lineWidth: '1px',
   gridWidth: '1px',
-  borderWidth: '1px',
   grid: { y: true, x: false },
   border: true,
   textColor: 'rgb(0,0,0)'

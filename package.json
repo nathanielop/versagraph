@@ -4,17 +4,33 @@
   "author": "Nathaniel Pendy",
   "license": "MIT",
   "version": "1.0.0",
+  "scripts": {
+    "start": "parcel src/test/index.html --open"
+  },
   "dependencies": {
-    "react": "17"
+    "react": "15 || 16 || 17"
   },
   "devDependencies": {
+    "@babel/preset-env": "7",
+    "@babel/preset-react": "7",
     "eslint-config-coderiety": "2",
-    "kiss-test": "0.2"
+    "kiss-test": "0.2",
+    "parcel-bundler": "1",
+    "react-dom": "17"
   },
-  "repository": { "url": "https://www.github.com/nathanielop/versagraph" },
+  "repository": {
+    "url": "https://www.github.com/nathanielop/versagraph"
+  },
   "main": "src/index.js",
   "eslintConfig": {
     "root": true,
-    "extends": "coderiety"
+    "extends": "coderiety",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "window": "readonly"
+    }
   }
 }
